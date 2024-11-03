@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<head>
+<title>responsi prakpemweb 1</title>
+<style>
+    body{
+        background-color:#f4f4f4;
+        font-family:'roboto',sans-serif;
+    }
+    .container{
+        background-color:#fff;
+        padding:20px;
+        margin-top:20px;
+        margin-left:30px;
+        margin-right:30px;
+        margin-bottom:20px;
+    }
+    h1{
+        text-align:center;
+    }
+    button{
+        width:100%;
+        border:none;
+        color:#fff;
+        font-weight:1;
+        cursor:pointer;
+        padding: 5px;
+    }
+    button[type=submit]{
+        background-color:#4Caf50;
+    }
+    button[type=reset]{
+        background-color:red;
+    }
+    .spasi{
+        padding:3px;
+    }
+    .skillbro {
+        text-align: center;
+    }
+
+    form .inputantext input{
+        padding-top:5px;
+        padding-left:7px;
+        padding-bottom:5px;
+        width:100%;
+        }
+    form .inputantext select{
+        width:100%;
+        padding-top:5px;
+        padding-bottom:5px;
+        padding-left:7px;
+    }
+    .avatar{
+        text-align:center;
+        font-weight:9px;
+    }
+        
+    .avatar img{
+        width:150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius:100px;
+    }
+</style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>RPG Character Creation</h1>
+        <div class="inputan">
+            <form method="post" onsubmit="createCharacter(); return false;">
+                <div class="inputantext">
+                    <label for="chara">Character Name:</label><br>
+                    <input type="text" id="chara" name="chara" placeholder="Enter Charachter Name"><br><br>
+                    <label for="race">Race:</label><br>
+                    <select id=race name="race">
+                        <option value="Human">Human</option>
+                        <option value="Elf">Elf</option>
+                        <option value="Dwarf">Dwarf</option>
+                        <option value="Orc">Orc</option>
+                    </select>
+                        <br><br>
+                    <label for="class">Class</label><br>
+                    <select id="class" name="class">
+                        <option value="Warior">Warior</option>
+                        <option value="Mage">Mage</option>
+                        <option value="Archer">Archer</option>
+                        <option value="Cleric">Cleric</option>
+                    </select>
+                        <br><br>
+                </div>
+                    
+                <label for="skill">Skills:</label>
+                <div class="skillbro">
+                    <input type="checkbox" value="Swordmanship" id="swordmanship" name="sword">Swordmanship
+                    <input type="checkbox" id="archery" value="Archery" name="archery">Archery
+                    <input type="checkbox" id="magic" value="Magic" name="magic">Magic
+                    <input type="checkbox" id="healing" value="Healing" name="healing">Healing<br><br>
+                </div>
+                <div class="submit">
+                    <button type="submit" >Create Character</button>
+                </div>
+                <div class="spasi"></div>
+                <div class="reset">
+                <button type="reset">Reset Character</button></div>
+            </form>
+        </div>
+            <br><br>
+        <div class="avatar">
+            <img src="profile.webp" id="charaImg"><br>
+            <h3 id="charaName">Character Name</h3>
+            <p id="charaDetail">Race: - | Class: -</p>
+            <p id="charaSkills">Skills: None</p>
+            <br>
+        </div>
+    </div>
+</body>
+    
+<script>
+    function createCharacter() {
+        const charName = document.getElementById('chara').value;
+        const charRace = document.getElementById('race').value;
+        const charClass = document.getElementById('class').value;
+
+        const skillsCheckboxes = document.querySelectorAll('.skillbro input[type="checkbox"]');
+        const selectedSkills = Array.from(skillsCheckboxes)
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => checkbox.value);
+        
+        if(charName==""){
+            alert("Diisi dulu yak namanya");
+            return;
+        }
+
+        document.getElementById('charaName').textContent = charName;
+        document.getElementById('charaDetail').textContent = `Race: ${charRace} | Class: ${charClass}`;
+        document.getElementById('charaSkills').textContent = `Skills: ${selectedSkills.length ? selectedSkills.join(', ') : 'None'}`;
+
+        if (charRace === 'Human') {
+            document.getElementById('charaImg').src = 'human.webp';
+        } else if (charRace === 'Orc') {
+            document.getElementById('charaImg').src = 'orc.webp';
+        } else if (charRace === 'Elf') {
+            document.getElementById('charaImg').src = 'elf.webp';
+        } else if (charRace === 'Dwarf') {
+            document.getElementById('charaImg').src = 'dwarf.webp';
+        } else {
+            document.getElementById('charaImg').src = 'profile.webp';
+        }
+        
+    }
+</script>
+</html>
